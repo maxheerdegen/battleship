@@ -38,11 +38,31 @@ describe('test gameboard factory', () => {
   gameboard.placeShip("D9", ship, "vertical");
 
   test('expect board at B3 to be of type object', () => {
-    expect(typeof gameboard.board[1][2]).toBe('object')
+    expect(typeof gameboard.board[1][2]).toBe('object');
+  })
+
+  test('attack on B3 should return "Hit"', () => {
+    expect(gameboard.receiveAttack("B3")).toBe("Hit!");
+  })
+
+  test('board should not be defeated', () => {
+    expect(gameboard.isBoardDefeated()).toBeFalsy();
+  })
+
+  test('another attack on B3 should return "You already attacked this field!"', () => {
+    expect(gameboard.receiveAttack("B3")).toBe("You already attacked this field!");
   })
 
   test('expect board at B4 to be of type object', () => {
-    expect(typeof gameboard.board[1][3]).toBe('object')
+    expect(typeof gameboard.board[1][3]).toBe('object');
+  })
+  
+  test('attack on B4 should return "Ship sank!"', () => {
+    expect(gameboard.receiveAttack("B4")).toBe("Ship sank!");
+  })
+  
+  test('board should be defeated', () => {
+    expect(gameboard.isBoardDefeated()).toBeTruthy();
   })
 
   test('expect board at B5 to be undefined', () => {

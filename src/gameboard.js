@@ -45,7 +45,43 @@ function createGameboad () {
         }
     }
 
-    return { board, placeShip }
+    const receiveAttack = (coordinate) => {
+
+        if (attacks.includes(coordinate)) {
+            return "You already attacked this field!";
+        } else {
+            attacks.push(coordinate);
+        }
+
+        const xCoordinate = calculateX(coordinate);
+        const yCoordinate = calculateY(coordinate);
+        const valueInBoard = board[yCoordinate][xCoordinate];
+        
+        if (valueInBoard !== undefined) {
+            valueInBoard.hit();
+            if (valueInBoard.isSunk()) {
+                return "Ship sank!"
+            } else {
+                return "Hit!"
+            }
+        }
+        return "Miss";
+    }
+
+    const isBoardDefeated = () => {
+        for(let i = 0; i < 10; i++) {
+            for(let j = 0; j < 10; j++) {
+                if (board[i][j] !== undefined) {
+                    if (!board[i][j].isSunk()) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    return { board, placeShip, receiveAttack, isBoardDefeated }
 }
 
 export { createShip, createGameboad };
