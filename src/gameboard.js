@@ -65,7 +65,7 @@ function createGameboad () {
                 return "Hit!"
             }
         }
-        return "Miss";
+        return "Miss!";
     }
 
     const isBoardDefeated = () => {
@@ -84,4 +84,11 @@ function createGameboad () {
     return { board, placeShip, receiveAttack, isBoardDefeated }
 }
 
-export { createShip, createGameboad };
+function createPlayer(name) {
+    const playerName = name;
+    const board = createGameboad();
+
+    return { playerName, board }
+}
+
+export { createShip, createGameboad, createPlayer };

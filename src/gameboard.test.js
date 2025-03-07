@@ -69,6 +69,10 @@ describe('test gameboard factory', () => {
     expect(gameboard.board[1][4]).toBeUndefined();
   })
 
+  test('attack on B5 should return "Miss!"', () => {
+    expect(gameboard.receiveAttack("B5")).toBe("Miss!");
+  })
+
   test('expect board at E9 to be of type object', () => {
     expect(typeof gameboard.board[4][8]).toBe('object');
   })
